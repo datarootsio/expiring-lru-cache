@@ -4,7 +4,7 @@
 
 ## Usage
 
-A dummy cached function whose cache will invalidate after 10 seconds.
+Here an example cached function whose cache will invalidate after 10 seconds.
 
 ```python
 from expiring_lru_cache import lru_cache
@@ -15,7 +15,7 @@ def my_plus_one_func(x: int) -> int:
 
 ```
 
-A dummy cached function whose cache will invalidate after 1 day.
+Here an example cached function whose cache will invalidate after 1 day. Note that the convenience variables `minutes`, `hours` and `days` are available within the `expiring_lru_cache` namespace.
 
 ```python
 from expiring_lru_cache import lru_cache, days
