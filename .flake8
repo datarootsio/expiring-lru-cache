@@ -1,2 +1,10 @@
 [flake8]
-ignore = E501
+exclude =
+    .git,
+    *.egg-info,
+    __pycache__,
+    .tox,
+    .pytest_cache
+    .ipynb_checkpoints,
+    venv,
+    docs
