@@ -4,6 +4,8 @@ import logging
 from datetime import datetime, timedelta
 from typing import Any, Callable, Optional, Union
 
+from expiring_lru_cache.version import __version__  # noqa: F401
+
 logging.getLogger("expiring_lru_cache").addHandler(logging.NullHandler())
 
 MINUTES = 60
