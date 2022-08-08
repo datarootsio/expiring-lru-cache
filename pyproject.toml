@@ -4,6 +4,11 @@ version = "0.0.0-dev"  # dynamically set in CI
 description = "LRU caching with expiration period."
 authors = ["Bart Smeets <bart@dataroots.io>"]
 license = "MIT"
+readme = "README.md"
+homepage = "https://datarootsio.github.io/expiring-lru-cache/"
+repository = "https://github.com/datarootsio/expiring-lru-cache"
+keywords = ["caching", "expiration", "drop-in", "replacement"]
+include = ["LICENSE"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
