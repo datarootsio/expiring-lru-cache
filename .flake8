@@ -8,3 +8,4 @@ exclude =
     .ipynb_checkpoints,
     venv,
     docs
+max-line-length = 88

@@ -1,19 +1,22 @@
 """Core functionality."""
-from datetime import datetime, timedelta
 import functools
 import logging
+from datetime import datetime, timedelta
+from typing import Any, Callable, Optional, Union
 
 logging.getLogger("expiring_lru_cache").addHandler(logging.NullHandler())
 
-minutes = 60
-hours = 60 * minutes
-days = 24 * hours
+MINUTES = 60
+HOURS = 60 * MINUTES
+DAYS = 24 * HOURS
 
 
-def init_cache(
-    func: callable, expires_after: int, *args: list, **kwargs: dict
-) -> callable:
-    """Initialize cached function by wrapping it in functools' lru_cache."""
+# Bug in type hints for `functools.lru_cache` + mypy
+# https://github.com/python/mypy/issues/5858#issuecomment-932773127
+def _init_cache(
+    func: Callable, expires_after: Optional[int], *args: Any, **kwargs: Any
+) -> Callable:
+    """Initialize cached function by wrapping it in `functools.lru_cache`."""
     cached_func = functools.lru_cache(*args, **kwargs)(func)
     if expires_after:
         setattr(
@@ -24,35 +27,40 @@ def init_cache(
     return cached_func
 
 
-def expired(cached_func: callable) -> bool:
+def _expired(cached_func: Callable) -> bool:
     """Check if cached function is expired."""
     if hasattr(cached_func, "__expires_at"):
         return getattr(cached_func, "__expires_at") < datetime.now()
-    else:
-        return False
+    return False
 
 
-def lru_cache(expires_after: int = None, *args: list, **kwargs: dict) -> callable:
-    """LRU caching with expiration period.
+def lru_cache(
+    expires_after: Optional[int] = None,
+    *args: Union[int, bool],
+    **kwargs: Union[int, bool]
+) -> Callable:
+    """
+    LRU caching with expiration period.
 
-    Acts as a drop-in replacement of functools.lru_cache. Arguments valid for functools.lru_cache can also be passed to this functions.
-
-    Args:
-        expires_after (int, optional): number of seconds after which to invalidate cache. If None, will never invalidate based on time.  The convenience variables `minutes`, `hours` and `days` are provided as to be able to provide e.g. `2 * days` as an invalidation period. Defaults to None.
-
-    Returns:
-        callable: cached function
+    Acts as a drop-in replacement of `functools.lru_cache`. Arguments valid for
+     `functools.lru_cache` can also be passed.
+    :param expires_after: number of seconds after which to invalidate cache - `None`
+     will never invalidate based on time. Convenience variables `MINUTES`, `HOURS`
+     and `DAYS` are available (using `lru_cache(expires_after=2 * DAYS)`)
+    :param args: `functools.lru_cache`'s positional arguments
+    :param kwargs: `functools.lru_cache`'s keyword arguments
+    :return: cached function
     """
 
-    def decorate(func: callable) -> callable:
-        cached_func = init_cache(func, expires_after, *args, **kwargs)
+    def decorate(func: Callable) -> Callable:
+        cached_func = _init_cache(func, expires_after, *args, **kwargs)
 
         @functools.wraps(func)
-        def wrapper(*args: list, **kwargs: dict) -> callable:
+        def wrapper(*args: Union[int, bool], **kwargs: Union[int, bool]) -> Callable:
             nonlocal cached_func
-            if expired(cached_func):
-                logging.debug("resetting cache")
-                cached_func = init_cache(func, expires_after, *args, **kwargs)
+            if _expired(cached_func):
+                logging.debug("Resetting cache")
+                cached_func = _init_cache(func, expires_after, *args, **kwargs)
             return cached_func(*args, **kwargs)
 
         return wrapper
