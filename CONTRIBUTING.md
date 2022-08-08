@@ -39,7 +39,12 @@ sync with git tags.
 ### Git tags
 
 Tagging happens in CICD. See the [CICD file](https://github.com/datarootsio/expiring-lru-cache/blob/main/.github/workflows/publish.yml)
-for more information.
+for more information. The bumping of tags also happens automatically with
+[`codacy/git-version@2.2.0`](https://github.com/codacy/git-version) for commits in the
+`main` branch. If any commit contains `breaking:`, we'll have a _major version_ bump.
+Including `feature:` will incur a _minor version_ bump. The absence of both `breaking:`
+and `feature:` yields a patch bump. **Including both `breaking:` and `feature:` will yield
+a _major version_ bump.**
 
 ## Documentation
 
