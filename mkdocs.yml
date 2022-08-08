@@ -1,0 +1,68 @@
+
+site_name: "expiring-lru-cache"
+site_description: "Documentation for `expiring-lru-cache`."
+site_url: "https://datarootsio.github.io/expiring-lru-cache"
+repo_url: "https://github.com/datarootsio/expiring-lru-cache"
+edit_uri: "blob/main/docs/"
+repo_name: "datarootsio/expiring-lru-cache"
+
+markdown_extensions:
+  - def_list
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.snippets:
+      check_paths: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+theme:
+  name: "material"
+#  logo: images/sm-logo-white.png
+#  favicon: images/sm-logo.png
+  font:
+    text: arvo
+    code: poppins
+  icon:
+    repo: fontawesome/brands/github-alt
+  features:
+    - navigation.top
+
+plugins:
+- search
+- autorefs
+- coverage
+- mkdocstrings:
+    watch:
+      - expiring_lru_cache
+    handlers:
+      python:
+        selection:
+          docstring_style: sphinx
+
+extra_css:
+  - stylesheets/extra.css
+
+nav:
+- Home: index.md
+- API: api.md
+- Development:
+  - Contributing: contrib.md
+  - Coverage report: coverage.md
+
+copyright: 'Maintained by dataroots'
+
+extra:
+    version:
+      provider: mike
+    social:
+        - icon: fontawesome/brands/github-alt
+          link: 'https://github.com/datarootsio'
+        - icon: fontawesome/brands/linkedin
+          link: 'https://www.linkedin.com/company/dataroots/'
+        - icon: fontawesome/brands/instagram
+          link: 'https://www.instagram.com/lifeatdataroots/'
+        - icon: fontawesome/brands/youtube
+          link: 'https://www.youtube.com/c/dataroots'
+        - icon: fontawesome/solid/globe
+          link: 'https://dataroots.io/'
