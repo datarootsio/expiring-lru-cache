@@ -2,7 +2,7 @@
 name = "expiring-lru-cache"
 version = "0.0.0-dev"  # dynamically set in CI
 description = "LRU caching with expiration period."
-authors = ["Bart Smeets <bart@dataroots.io>"]
+authors = ["Murilo Kuniyoshi Suzart Cunha <murilo@dataroots.io>", "Bart Smeets <bart@dataroots.io>"]
 license = "MIT"
 readme = "README.md"
 homepage = "https://datarootsio.github.io/expiring-lru-cache/"
