@@ -18,8 +18,8 @@ markdown_extensions:
 
 theme:
   name: "material"
-#  logo: images/sm-logo-white.png
-#  favicon: images/sm-logo.png
+  logo: images/dall_e_logo.png
+  favicon: images/favicon.png
   font:
     text: arvo
     code: poppins

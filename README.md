@@ -1,5 +1,8 @@
-# expiring_lru_cache
+<p align="center">
+  <a href="https://datarootsio.github.io/expiring-lru-cache/"><img alt="logo" src="https://raw.githubusercontent.com/datarootsio/expiring-lru-cache/main/docs/images/dall_e_logo.png" height="200"></a>
+</p>
 
+# `expiring_lru_cache`
 <p align="left">
   <a href="https://dataroots.io"><img alt="Maintained by dataroots" src="https://dataroots.io/maintained-rnd.svg" /></a>
   <a href="https://pypi.org/project/expiring-lru-cache/"><img alt="Python versions" src="https://img.shields.io/pypi/pyversions/expiring-lru-cache" /></a>
