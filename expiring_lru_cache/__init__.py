@@ -1,4 +1,5 @@
 """Core functionality."""
+
 import functools
 import logging
 from datetime import datetime, timedelta
@@ -39,7 +40,7 @@ def _expired(cached_func: Callable) -> bool:
 def lru_cache(
     expires_after: Optional[int] = None,
     *args: Union[int, bool],
-    **kwargs: Union[int, bool]
+    **kwargs: Union[int, bool],
 ) -> Callable:
     """
     LRU caching with expiration period.

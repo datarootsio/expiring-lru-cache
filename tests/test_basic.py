@@ -1,4 +1,5 @@
 """Basic testing."""
+
 from datetime import datetime
 from functools import partial
 from time import sleep
@@ -28,6 +29,7 @@ def test_expiration_basic() -> None:
     p = partial(lru_cache(expires_after=2)(lambda: datetime.now()))
     res = call_every_x_secs(p, 4)
     assert any(el != res[0] for el in res)
+
 
 def test_has_cache_info() -> None:
     """Test if cache has info."""
