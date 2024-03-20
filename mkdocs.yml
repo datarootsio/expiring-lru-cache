@@ -18,7 +18,7 @@ markdown_extensions:
 
 theme:
   name: "material"
-  logo: images/dall_e_logo.png
+  logo: images/logo.png
   favicon: images/favicon.png
   font:
     text: arvo

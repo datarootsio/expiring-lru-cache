@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://datarootsio.github.io/expiring-lru-cache/"><img alt="logo" src="https://raw.githubusercontent.com/datarootsio/expiring-lru-cache/main/docs/images/dall_e_logo.png" height="200"></a>
+  <a href="https://datarootsio.github.io/expiring-lru-cache/"><img alt="logo" src="https://raw.githubusercontent.com/datarootsio/expiring-lru-cache/main/docs/images/logo.png" height="200"></a>
 </p>
 
 # `expiring_lru_cache`
