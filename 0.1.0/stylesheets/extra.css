@@ -1,0 +1,6 @@
+:root {
+  --md-primary-fg-color:        #272626;
+}
+.md-nav--secondary {
+  display: none;
+}
