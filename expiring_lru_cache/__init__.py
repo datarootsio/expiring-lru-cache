@@ -65,6 +65,7 @@ def lru_cache(
                 cached_func = _init_cache(func, expires_after, *args, **kwargs)
             return cached_func(*args, **kwargs)
 
+        wrapper.cache_info = lambda: cached_func.cache_info()
         return wrapper
 
     return decorate
