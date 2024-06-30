@@ -39,8 +39,8 @@ def _expired(cached_func: Callable) -> bool:
 
 def lru_cache(
     expires_after: Optional[int] = None,
-    *args: Union[int, bool],
-    **kwargs: Union[int, bool],
+    *lru_args: Union[int, bool],
+    **lru_kwargs: Union[int, bool],
 ) -> Callable:
     """
     LRU caching with expiration period.
@@ -56,14 +56,14 @@ def lru_cache(
     """
 
     def decorate(func: Callable) -> Callable:
-        cached_func = _init_cache(func, expires_after, *args, **kwargs)
+        cached_func = _init_cache(func, expires_after, *lru_args, **lru_kwargs)
 
         @functools.wraps(func)
         def wrapper(*args: Union[int, bool], **kwargs: Union[int, bool]) -> Callable:
             nonlocal cached_func
             if _expired(cached_func):
                 logging.debug("Resetting cache")
-                cached_func = _init_cache(func, expires_after, *args, **kwargs)
+                cached_func = _init_cache(func, expires_after, *lru_args, **lru_kwargs)
             return cached_func(*args, **kwargs)
 
         wrapper.cache_info = lambda: cached_func.cache_info()

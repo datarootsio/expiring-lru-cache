@@ -1,6 +1,6 @@
 """Basic testing."""
 
-from datetime import datetime
+from datetime import datetime, timedelta
 from functools import partial
 from time import sleep
 from typing import Callable
@@ -27,6 +27,33 @@ def test_no_expiration_basic() -> None:
 def test_expiration_basic() -> None:
     """Test with expiration."""
     p = partial(lru_cache(expires_after=2)(lambda: datetime.now()))
+    res = call_every_x_secs(p, 4)
+    assert any(el != res[0] for el in res)
+
+
+def test_expiration_with_func_args() -> None:
+    """Test with expiration."""
+
+    @lru_cache(expires_after=2)
+    def get_time(secs: int):
+        # get current time and add secs
+        curr_time = datetime.now()
+        return curr_time + timedelta(seconds=secs)
+
+    p = partial(get_time, 2)
+    res = call_every_x_secs(p, 4)
+    assert any(el != res[0] for el in res)
+
+
+def test_expiration_with_func_args_as_partial() -> None:
+    """Test with expiration."""
+
+    def get_time(secs: int):
+        # get current time and add secs
+        curr_time = datetime.now()
+        return curr_time + timedelta(seconds=secs)
+
+    p = partial(lru_cache(expires_after=2), partial(get_time, 2))
     res = call_every_x_secs(p, 4)
     assert any(el != res[0] for el in res)
 
